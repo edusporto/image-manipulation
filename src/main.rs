@@ -12,6 +12,7 @@ fn main() {
     
     // TODO: use rayon
     // https://rust-lang-nursery.github.io/rust-cookbook/concurrency/parallel.html
+    // https://stackoverflow.com/questions/48922420/how-do-i-use-rayon-with-an-existing-iterator/54201274#54201274
 
     for pixel in img.pixels_mut() {
         let rgb = pixel.to_rgb();
