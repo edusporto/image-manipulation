@@ -10,6 +10,9 @@ fn main() {
     
     let gray = image::Rgb([128_u8, 128, 128]);
     
+    // TODO: use rayon
+    // https://rust-lang-nursery.github.io/rust-cookbook/concurrency/parallel.html
+
     for pixel in img.pixels_mut() {
         let rgb = pixel.to_rgb();
     
