@@ -24,11 +24,31 @@ fn calc_location(
 
 fn main() -> Result<(), Box<dyn Error>> {
     let mut img = image::open("image.png").unwrap().to_rgb();
+<<<<<<< HEAD
     let pattern = image::open("pattern.jpg").unwrap().to_rgb();
 
     let old_color = image::Rgb([209, 255, 125]);
     // let new_color = image::Rgb([20, 20, 240]);
     //let mut pixels_to_change = Vec::<image::Rgb<u8>>::new();
+=======
+    
+    let gray = image::Rgb([128_u8, 128, 128]);
+    
+    // TODO: use rayon
+    // https://rust-lang-nursery.github.io/rust-cookbook/concurrency/parallel.html
+    // https://stackoverflow.com/questions/48922420/how-do-i-use-rayon-with-an-existing-iterator/54201274#54201274
+
+    for pixel in img.pixels_mut() {
+        let rgb = pixel.to_rgb();
+    
+        if rgb[0] > 240 {
+            if rgb[1] > 240 {
+                if rgb[2] > 240 {
+                    *pixel = gray;
+                }
+            }
+        }
+>>>>>>> a56a0e3a9236d91d76c902b2ebd1f6bd51628b83
 
     let size1 = (img.width(), img.height());
     let size2 = (pattern.width(), pattern.height());
