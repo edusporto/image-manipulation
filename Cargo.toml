@@ -8,5 +8,6 @@ edition = "2018"
 
 [dependencies]
 rgb = "0.8"
-image = "0.22.1"
-#rayon = "1.1"
+image = "0.22"
+# rayon = "1.1"
+imageproc = "0.19"
