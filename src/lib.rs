@@ -45,13 +45,13 @@ pub fn draw_pattern(pixel: &mut (u32, u32, &mut Color), pattern: &Image, color: 
     let loc = calc_location((pattern.width(), pattern.height()), (pixel.0, pixel.1));
     *pixel.2 = if *pattern.get_pixel(loc.0, loc.1) == BLACK {
         color
+    } else if is_light(color) {
+        darken(color)
     } else {
-        if is_light(color) {
-            darken(color)
-        } else {
-            lighten(color)
-        }
+        lighten(color)
     }
+        
+    
 }
 
 fn sub(lhs: u8, rhs: u8) -> u8 {
