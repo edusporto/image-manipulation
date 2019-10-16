@@ -50,8 +50,6 @@ pub fn draw_pattern(pixel: &mut (u32, u32, &mut Color), pattern: &Image, color: 
     } else {
         lighten(color)
     }
-        
-    
 }
 
 fn sub(lhs: u8, rhs: u8) -> u8 {
@@ -100,7 +98,7 @@ pub fn read_patterns(dir: &str) -> Result<Vec<Image>, Box<dyn Error>> {
 use std::env::Args;
 
 #[derive(Debug)]
-struct ColorPickingError(&'static str);
+pub struct ColorPickingError(&'static str);
 
 impl std::fmt::Display for ColorPickingError {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
@@ -112,25 +110,31 @@ impl std::fmt::Display for ColorPickingError {
     }
 }
 
+impl std::convert::From<std::num::ParseIntError> for ColorPickingError {
+    fn from(_: std::num::ParseIntError) -> Self {
+        ColorPickingError("Failed to parse an int value")
+    }
+}
+
 impl Error for ColorPickingError {}
 
 pub fn read_colors(
     args: &mut Args,
     img: &Image,
-) -> Result<Vec<(Color, ColorThreshold)>, Box<dyn Error>> {
+) -> Result<Vec<(Color, ColorThreshold)>, ColorPickingError> {
     let mut colors = Vec::new();
 
     for color_options in args {
         let color_options: Vec<&str> = color_options.split(' ').collect();
 
         if color_options.len() < 2 {
-            return Result::Err(Box::new(ColorPickingError("Missing color coordinates")));
+            return Result::Err(ColorPickingError("Missing color coordinates"));
         }
 
         if color_options.len() < 5 {
-            return Result::Err(Box::new(ColorPickingError(
+            return Result::Err(ColorPickingError(
                 "Missing color threshold values",
-            )));
+            ));
         }
 
         let x: u32 = color_options[0].parse()?;
