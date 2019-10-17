@@ -5,8 +5,6 @@ use image_manipulation::*;
 use std::env;
 use std::error::Error;
 
-// TODO: test on Android
-
 fn main() -> Result<(), Box<dyn Error>> {
     let mut args = env::args();
     args.next();

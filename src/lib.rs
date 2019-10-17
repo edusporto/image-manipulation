@@ -132,9 +132,7 @@ pub fn read_colors(
         }
 
         if color_options.len() < 5 {
-            return Result::Err(ColorPickingError(
-                "Missing color threshold values",
-            ));
+            return Result::Err(ColorPickingError("Missing color threshold values"));
         }
 
         let x: u32 = color_options[0].parse()?;
